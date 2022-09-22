@@ -1,6 +1,6 @@
-from rembg import remove
-import cv2
-import cvzone
+from rembg import remove     # https://github.com/danielgatis/rembg
+import cv2       # pip install opencv-python
+import cvzone    # pip install cvzone
 
 # Read Image
 # Images\1.jpg
