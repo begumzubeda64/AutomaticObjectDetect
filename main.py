@@ -1,5 +1,6 @@
 from rembg import remove
 import cv2
+import cvzone
 
 # Read Image
 # Images\1.jpg
@@ -24,9 +25,9 @@ cv2.imshow("Cropped", croppedImg)
 
 # Remove Background
 removeBgImg = remove(croppedImg)
-cv2.imwrite(r"Images\demo.jpg", removeBgImg)
+cv2.imwrite(r"Images\remove.png", removeBgImg)
 
-remImg = cv2.imread(r"Images\demo.jpg")
+remImg = cv2.imread(r"Images\remove.png")
 
 run = False
 def draw_outline(event, x, y, flags, param):
@@ -48,8 +49,22 @@ cv2.setMouseCallback("Removed Background", draw_outline)
 while True:
     # Display Image
     cv2.imshow("Removed Background", remImg)
-    cv2.imwrite(r"Images\demo.png", remImg)
+
     if cv2.waitKey(1) & 0xFF == 113:  # press "q" to exit
+        cv2.imwrite(r"Images\outline.png", remove(remImg))
+        cv2.destroyWindow("Cropped")
+        cv2.destroyWindow("Select the area")
+        cv2.destroyWindow("Removed Background")
         break
 
-cv2.destroyAllWindows()
+# Overlay
+finalImg = cv2.imread(r"Images\outline.png", cv2.IMREAD_UNCHANGED)
+imgResult = cvzone.overlayPNG(resizedImg, finalImg, [xi, yi])
+
+while True:
+    cv2.imshow("Output", imgResult)
+    if cv2.waitKey(0) & 0xFF == 113:  # press "q" to exit
+        cv2.destroyWindow("Output")
+        break
+
+
