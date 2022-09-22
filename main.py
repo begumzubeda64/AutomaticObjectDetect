@@ -48,7 +48,7 @@ cv2.setMouseCallback("Removed Background", draw_outline)
 while True:
     # Display Image
     cv2.imshow("Removed Background", remImg)
-    cv2.imwrite(r"Images\demo.png", srcImg)
+    cv2.imwrite(r"Images\demo.png", remImg)
     if cv2.waitKey(1) & 0xFF == 113:  # press "q" to exit
         break
 
